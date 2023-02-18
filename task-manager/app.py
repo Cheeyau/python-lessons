@@ -11,7 +11,7 @@ migrate = Migrate(app, db)
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     content = db.Column(db.String(200), nullable = False)
-    data_created = db.Column(db.DataTime, default = db.func.current_timestamp())
+    data_created = db.Column(db.DateTime, default = db.func.current_timestamp())
     completed = db.Column(db.Boolean, default = False, nullable = False)
     FamilyMember_id = db.Column(db.Integer)
     
@@ -41,8 +41,8 @@ def familyMember():
         output = []
         for member in familyMembers:
             member_data = {}
-            member_data['id'] = todo.id
-            member_data['name'] = todo.name
+            member_data['id'] = member.id
+            member_data['name'] = member.name
             output.append(member)
         return {'familyMembers' : output}
 
